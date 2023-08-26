@@ -1,0 +1,38 @@
+﻿@model lucas_2._0.Views.Admin.AddOrEditSubCategoryVM
+
+@{
+    ViewData["PageTitle"] = Model.SubCategoryId == 0 ? $"Add sub category to {Model.CategoryName}" : $"Edit sub category of {Model.CategoryName}";
+}
+
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="widget p-5" style="background-color:#212b36">
+
+            <form asp-action="AddOrEditSubCategory" method="post">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="SubCategoryId" value="@Model.SubCategoryId" />
+                <input type="hidden" asp-for="CategoryId" value="@Model.CategoryId" />
+                <input type="hidden" asp-for="CategoryName" value="@Model.CategoryName" />
+
+                <div class="mb-3">
+                    <label asp-for="SubCategoryName"> Sub Category Name </label>
+                    <input asp-for="SubCategoryName" type="text" formnovalidate="formnovalidate" />
+                    <span asp-validation-for="SubCategoryName" class="text-danger"></span>
+                </div>
+                
+                <button type="submit"> Submit </button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -13,7 +13,7 @@ var connString = builder.Configuration
 // Registrera Context-klassen för dependency injection
 builder.Services.AddDbContext<ApplicationContext>
     (o => o.UseSqlServer(connString));
-
+builder.Services.AddScoped<DataService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

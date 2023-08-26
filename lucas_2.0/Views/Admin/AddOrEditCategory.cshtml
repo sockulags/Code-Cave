@@ -1,0 +1,36 @@
+﻿@model lucas_2._0.Views.Admin.AddOrEditCategoryVM
+
+@{
+    ViewData["PageTitle"] = Model.CategoryId == 0 ? "Create a new category" : "Edit category name";
+}
+
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="widget p-5" style="background-color:#212b36">
+
+            <form asp-action="AddOrEditCategory" method="post">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" name="CategoryId" value="@Model.CategoryId" />
+
+                <div class="mb-3">
+                    <label asp-for="CategoryName"> Category Name </label>
+                    <input asp-for="CategoryName" type="text" formnovalidate="formnovalidate" />
+                    <span asp-validation-for="CategoryName" class="text-danger"></span>
+                </div>
+                
+                <button type="submit"> Submit </button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
