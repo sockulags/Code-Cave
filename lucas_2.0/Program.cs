@@ -1,7 +1,18 @@
+﻿using lucas_2._0.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Hämta connection-strängen från AppSettings.json
+var connString = builder.Configuration
+    .GetConnectionString("DefaultConnection");
+
+// Registrera Context-klassen för dependency injection
+builder.Services.AddDbContext<ApplicationContext>
+    (o => o.UseSqlServer(connString));
 
 var app = builder.Build();
 
@@ -9,7 +20,7 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    
     app.UseHsts();
 }
 
