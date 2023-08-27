@@ -1,4 +1,4 @@
-﻿@model IEnumerable<lucas_2._0.Models.Category>
+﻿@model IndexVM[]
 
 @{
     ViewData["Title"] = "Index";
@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+               Category Name
             </th>
             <th></th>
         </tr>
@@ -22,12 +22,12 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                    <a asp-action="SubCategory" asp-route-id="@item.CategoryId">@item.CategoryName</a>
             </td>
             <td>
-                <a asp-action="AddOrEditCategory" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="SubCategory" asp-route-id="@item.Id">Sub categories</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="AddOrEditCategory" asp-route-id="@item.CategoryId">Edit</a> |
+                    <a asp-action="SubCategory" asp-route-id="@item.CategoryId">Sub categories</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
             </td>
         </tr>
 }

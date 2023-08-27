@@ -24,9 +24,7 @@ namespace lucas_2._0.Controllers
         // GET: Admin
         public async Task<IActionResult> Index()
         {
-              return _context.Categories != null ? 
-                          View(await _context.Categories.Include(p=>p.SubCategories).ToListAsync()) :
-                          Problem("Entity set 'ApplicationContext.Categories'  is null.");
+              return View(await _dataService.IndexView());
         }
 
         // GET: Admin/SubCategory/5

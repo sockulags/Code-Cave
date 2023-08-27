@@ -3,9 +3,9 @@
     public class IndexVM
     {
         public int CategoryId { get; set; }
-        public string CategoryName { get; set; } = string.Empty;
+        public string CategoryName { get; set; }
 
-        public string SubCategoryName { get; set; } = string.Empty;
+       
 
         
     }

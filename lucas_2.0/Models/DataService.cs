@@ -12,24 +12,12 @@ namespace lucas_2._0.Models
 
         public async Task<IndexVM[]> IndexView()
         {
-            var post = await _context.Categories.Include(p => p.SubCategories).ToListAsync();
-
-            var model = new IndexVM[post.Count];
-           for(int i = 0; i < post.Count; i++)
+            return await _context.Categories.Select(p => new IndexVM
             {
-                model[i] = new IndexVM
-                {
-                    CategoryName = post[i].Name,
-                    CategoryId = post[i].Id,
-                    SubCategoryName = post[i].SubCategories.ToString()
-                    
-
-                };
-
-            }
-            
-
-            return model;
+                CategoryId = p.Id,
+                CategoryName = p.Name,
+            })
+                .ToArrayAsync();
         }
 
         public AddOrEditCategoryVM GetCategory(int? id)
