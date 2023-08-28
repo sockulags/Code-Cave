@@ -60,10 +60,10 @@ namespace lucas_2._0.Controllers
         }
 
         //GET Admin/AddOrEditSubCategory
-        public IActionResult AddOrEditSubCategory(int id, int subCategoryId, string categoryName)
+        public IActionResult AddOrEditSubCategory(int? id, int subCategoryId, string categoryName)
         {
             if (subCategoryId == null)
-                return View(new AddOrEditSubCategoryVM() { CategoryId = id, CategoryName = categoryName });
+                return View(new AddOrEditSubCategoryVM() { CategoryId = subCategoryId, CategoryName = categoryName });
             else
                 return View(_dataService.GetSubCategory(id, subCategoryId, categoryName));
         }
@@ -78,6 +78,40 @@ namespace lucas_2._0.Controllers
                     await _dataService.AddSubCategoryAsync(model);
                 else
                     await _dataService.EditSubCategoryAsync(model);
+
+
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        //GET Admin/Posts
+        public IActionResult Posts(int subCategoryId)
+        {
+            return View(_dataService.GetListOfPosts(subCategoryId));
+        }
+
+        //GET Admin/AddOrEditPosts
+        public IActionResult AddOrEditPosts(int? id, int subCategoryId)
+        {
+            if (id == null)
+                return View(new AddOrEditPostsVM() { SubCategoryId = subCategoryId});
+            else
+                return View(_dataService.GetPosts(id));
+            
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddOrEditPosts(AddOrEditPostsVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.Id == 0)
+                    await _dataService.AddPostsAsync(model);
+                else
+                    await _dataService.EditPostsAsync(model);
 
 
                 return RedirectToAction(nameof(Index));

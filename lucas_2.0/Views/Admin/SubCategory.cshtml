@@ -20,7 +20,7 @@
         {
             <tr>
                 <td>
-                    @item.Name
+                    <a asp-action="Posts" asp-route-subCategoryId="@item.Id"> @item.Name</a>
                 </td>
                 <td>
                     <a asp-action="AddOrEditSubCategory" asp-route-id="@Model.CategoryId" asp-route-subCategoryId="@item.Id" asp-route-categoryName="@Model.CategoryName">Edit</a> |

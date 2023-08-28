@@ -1,0 +1,44 @@
+﻿@model AddOrEditPostsVM
+
+@{
+    ViewData["PageTitle"] = Model.Id == 0 ? "Create a new post" : "Edit post";
+}
+
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="widget p-5" style="background-color:#212b36">
+
+            <form asp-action="AddOrEditPosts" method="post">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="SubCategoryId" value="@Model.SubCategoryId" />
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+               
+
+                <div class="mb-3">
+                    <label asp-for="Name"> Post title </label>
+                    <input asp-for="Name" type="text" formnovalidate="formnovalidate" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Description"> Description </label>
+                    <textarea asp-for="Description" type="text" formnovalidate="formnovalidate" maxlength="500" spellcheck="true" ></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Code"> Code examples </label>
+                    <textarea asp-for="Code" type="text" formnovalidate="formnovalidate" maxlength="500" spellcheck="false"></textarea>
+                    <span asp-validation-for="Code" class="text-danger"></span>
+                </div>
+
+                <button type="submit"> Submit </button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

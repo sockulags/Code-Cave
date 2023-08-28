@@ -82,13 +82,68 @@ namespace lucas_2._0.Models
         }
 
                 
-        public AddOrEditSubCategoryVM GetSubCategory(int id, int subCategoryId, string name)
+        public AddOrEditSubCategoryVM GetSubCategory(int? id, int subCategoryId, string name)
         {
             return new AddOrEditSubCategoryVM { 
                 SubCategoryId = subCategoryId, 
-                CategoryId = id, 
+                CategoryId = (int)id, 
                 CategoryName = name, 
                 SubCategoryName = _context.SubCategories.Where(x=>x.Id == subCategoryId).Select(x=>x.Name).FirstOrDefault() };
+        }
+
+        public AddOrEditPostsVM GetPosts(int? id)
+        {
+
+            var post = _context.Posts.Find(id);
+            return new AddOrEditPostsVM
+            {
+                Id = (int)id,
+                Name = post.Title,
+                Description = post.Description,
+                Code = post.Code,
+                SubCategoryId = post.SubCategoryId,
+            };
+        }
+
+        public async Task AddPostsAsync(AddOrEditPostsVM model)
+        {
+            _context.Posts.Add(new Post
+            {
+                Title = model.Name,
+                Description = model.Description,
+                Code = model.Code,
+                SubCategoryId = model.SubCategoryId
+               
+            });
+
+            await _context.SaveChangesAsync();
+        }
+
+        internal async Task EditPostsAsync(AddOrEditPostsVM model)
+        {
+            Post post = new Post
+            {
+                Id = model.Id,
+                Title = model.Name,
+                Description = model.Description,
+                Code = model.Code,
+                SubCategoryId = model.SubCategoryId,
+            };
+            _context.Posts.Update(post);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public PostsVM GetListOfPosts(int subCategoryId)
+        {
+            var list = _context.Posts.Where(p => p.SubCategoryId == subCategoryId).ToList();
+
+            return new PostsVM
+            {
+                SubCategoryName = _context.SubCategories.Where(p => p.Id == subCategoryId).Select(p => p.Name).FirstOrDefault(),
+                SubCategoryId = subCategoryId,
+                Posts = list
+            };
         }
     }
 }
