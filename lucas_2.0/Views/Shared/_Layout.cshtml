@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/lucas_2._0.styles.css" asp-append-version="true" />
 </head>
 <body>
+    <div class="container-fluid">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -30,10 +31,18 @@
             </div>
         </nav>
     </header>
+    <div class="row">
+            <div class="col-sm-auto bg-light sticky-top">
+    @(await Component.InvokeAsync("MenuList"))
+            </div>
+            <div class="col-sm p-3 min-vh-100">
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+    </div>
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">

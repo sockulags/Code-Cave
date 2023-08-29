@@ -14,6 +14,7 @@ var connString = builder.Configuration
 builder.Services.AddDbContext<ApplicationContext>
     (o => o.UseSqlServer(connString));
 builder.Services.AddScoped<DataService>();
+builder.Services.AddScoped<MenuList>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

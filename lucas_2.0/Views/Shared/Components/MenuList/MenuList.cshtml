@@ -1,0 +1,44 @@
+﻿@model List<MenuList>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+      
+            <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
+                <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+                    <i class="bi-bootstrap fs-1"></i> Menu
+
+                </a>
+                @foreach (var category in Model){
+                <div class="dropdown">
+                    
+                           
+                    
+                        
+                   
+                            
+                    <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+                        @category.CategoryName
+                    </a>
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+                            @foreach(var item in category.SubCategories)
+                            {
+                                if(category.CategoryId == item.CategoryId)
+                                {
+                                <li><a class="dropdown-item" href="#">@item.Name</a></li>
+                                }
+                            }
+              
+                    </ul>
+                </div>
+                }
+            </div>
+       
+       
+            <!-- content -->
+     
+  
