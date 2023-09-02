@@ -28,7 +28,7 @@
                 </div>
                 <div class="mb-3">
                     <label asp-for="Code"> Code examples </label>
-                    <textarea asp-for="Code" type="text" formnovalidate="formnovalidate" maxlength="500" spellcheck="false"></textarea>
+                    <textarea id="codesample" asp-for="Code" type="text" formnovalidate="formnovalidate" maxlength="500" spellcheck="false"></textarea>
                     <span asp-validation-for="Code" class="text-danger"></span>
                 </div>
 
@@ -42,3 +42,33 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+<script>
+    tinymce.init({
+        selector: 'textarea#codesample',
+        height: 500,
+        plugins: 'codesample code lists',
+        codesample_languages: [
+            { text: 'HTML/XML', value: 'markup' },
+            { text: 'JavaScript', value: 'javascript' },
+            { text: 'CSS', value: 'css' },
+            { text: 'PHP', value: 'php' },
+            { text: 'Ruby', value: 'ruby' },
+            { text: 'Python', value: 'python' },
+            { text: 'Java', value: 'java' },
+            { text: 'C', value: 'c' },
+            { text: 'C#', value: 'csharp' },
+            { text: 'C++', value: 'cpp' }
+        ],
+        toolbar: 'codesample code numlist bullist',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+    });
+
+    // Prevent Bootstrap dialog from blocking focusin
+    document.addEventListener('focusin', (e) => {
+        if (e.target.closest(".tox-tinymce, .tox-tinymce-aux, .moxman-window, .tam-assetmanager-root") !== null) {
+            e.stopImmediatePropagation();
+        }
+    });
+</script>

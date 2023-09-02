@@ -1,8 +1,37 @@
-﻿@{
+﻿@model lucas_2._0.Views.Home.IndexVM[]
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Titel</h1>
+    <p>WYSIWYG</p>
 </div>
+
+
+
+@foreach(var item in Model)
+{
+    <div class="content-box">
+        <div class="row">
+            <div class="col">
+                <a asp-controller="Home" asp-action="ViewPost" asp-route-postId="@item.PostName">  <h3> @item.PostName </h3></a>
+            </div>
+                 </div>
+        <div class="row">
+            <div class="col">
+                @item.PostDescription
+            </div>
+           
+        </div>
+        <div class="row">
+            <div class="col">
+                <a asp-controller="Home" asp-action="CategoryList" asp-route-categoryName="@item.CategoryName"> @item.CategoryName</a>
+            </div>
+            <div class="col">
+                <a asp-controller="Home" asp-action="CategoryList" asp-route-categoryName="@item.CategoryName" asp-route-subCategoryName="@item.SubCategoryName">@item.SubCategoryName</a>
+            </div>
+        </div>
+    </div>
+}

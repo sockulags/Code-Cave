@@ -1,5 +1,8 @@
-﻿using lucas_2._0.Views.Admin;
+﻿using AspNetCore;
+using lucas_2._0.Views.Admin;
+using lucas_2._0.Views.Home;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace lucas_2._0.Models
 {
@@ -10,9 +13,9 @@ namespace lucas_2._0.Models
             _context = context;
         }
 
-        public async Task<IndexVM[]> IndexView()
+        public async Task<Views.Admin.IndexVM[]> IndexView()
         {
-            return await _context.Categories.Select(p => new IndexVM
+            return await _context.Categories.Select(p => new Views.Admin.IndexVM
             {
                 CategoryId = p.Id,
                 CategoryName = p.Name,
@@ -146,6 +149,83 @@ namespace lucas_2._0.Models
             };
         }
 
-      
+        public async Task<Views.Home.IndexVM[]> GetAllPosts()
+        {
+            var model = await _context.Posts
+                .OrderByDescending(p=>p.CreatedDate)
+                .Select(p => new Views.Home.IndexVM()
+            {
+                PostName = p.Title,
+                PostDescription = p.Description,
+                SubCategoryName = p.SubCategory.Name,
+                CategoryName = _context.SubCategories.Where(o=>o.Name == p.SubCategory.Name).Select(p=>p.Category.Name).FirstOrDefault(),
+            }).Take(10).ToArrayAsync();
+            return  model;
+        }
+
+        public async Task<CategoryListVM[]> GetCategoryPosts(string categoryName)
+        {
+            var id = await _context.Categories
+                .Where(p => p.Name == categoryName)
+                .Select(p => p.Id)
+                .FirstOrDefaultAsync();
+
+            var categoryPosts = await _context.Posts
+                .Where(p => _context.SubCategories
+                    .Where(sub => sub.CategoryId == id)
+                    .Any(sub => sub.Id == p.SubCategoryId))
+                .Include(p => p.SubCategory)
+                .Select(p => new CategoryListVM()
+                {
+                    PostName = p.Title,
+                    PostDescription = p.Description,
+                    SubCategoryName = p.SubCategory.Name,
+                    CategoryName = categoryName
+                })
+                .ToArrayAsync();
+
+            return categoryPosts;
+        }
+
+
+        public async Task<CategoryListVM[]> GetSubCategoryPosts(string categoryName, string subCategoryName)
+        {
+            var id = await _context.Categories
+                .Where(p => p.Name == categoryName)
+                .Select(p => p.Id)
+                .FirstOrDefaultAsync();
+
+            var subCategoryId = await _context.SubCategories
+                .Where(sub => sub.Name == subCategoryName)
+                .Select(sub => sub.Id)
+                .FirstOrDefaultAsync();
+
+            var categoryPosts = await _context.Posts
+                .Where(p => p.SubCategoryId == subCategoryId)
+                .Include(p => p.SubCategory)
+                .Select(p => new CategoryListVM()
+                {
+                    PostName = p.Title,
+                    PostDescription = p.Description,
+                    SubCategoryName = p.SubCategory.Name,
+                    CategoryName = categoryName
+                })
+                .ToArrayAsync();
+
+            return categoryPosts;
+        }
+
+        public async Task<PostViewVM> ShowPost(string postId)
+        {
+            var post = _context.Posts.Where(p => p.Title == postId).FirstOrDefault();
+
+            return new PostViewVM
+            {
+                Title = post.Title,
+                Description = post.Description,
+                Code = post.Code,
+                Created = post.CreatedDate
+            };
+        }
     }
 }
