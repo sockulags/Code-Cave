@@ -9,10 +9,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class ="description">
                @Model.CategoryName
             </th>
-            <th></th>
+            <th class="description"></th>
         </tr>
     </thead>
     <tbody>
@@ -20,11 +20,11 @@
         {
             <tr>
                 <td>
-                    <a asp-action="Posts" asp-route-subCategoryId="@item.Id"> @item.Name</a>
+                    <a asp-controller="Admin" asp-action="Posts" asp-route-subCategoryId="@item.Id"> @item.Name</a>
                 </td>
                 <td>
                     <a asp-action="AddOrEditSubCategory" asp-route-id="@Model.CategoryId" asp-route-subCategoryId="@item.Id" asp-route-categoryName="@Model.CategoryName">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-controller="Admin" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
@@ -33,5 +33,5 @@
 
 <div>
     
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Admin" asp-action="IndexList">Back to List</a>
 </div>

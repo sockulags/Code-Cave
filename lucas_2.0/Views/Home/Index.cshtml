@@ -3,34 +3,36 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<div class="container">
+<div class="intro"><h1 class="text"><strong><span style="text-align: center; font-family: georgia, palatino, serif;">The Code Cave : A Repository Of Knowledge</span></strong></h1></div>
+@*<h4 data-sourcepos="5:3-5:32"><span style="font-family: helvetica, arial, sans-serif;"><em>&lt; My journey as a developer /&gt;</em></span></h4>*@
+<p  data-sourcepos="7:3-7:197"><span style="font-family: tahoma, arial, helvetica, sans-serif;">Welcome to The Code Cave, a repository of my knowledge and experiences as a developer. I'm sharing everything I've learned along the way, from the basics of programming to more advanced concepts.</span></p>
+<p  data-sourcepos="9:3-9:134"><span style="font-family: tahoma, arial, helvetica, sans-serif;">Whether you're a beginner or a seasoned pro, you'll find something useful here. I hope my journey can inspire you to start your own.</span></p>
+<p data-sourcepos="11:3-11:28"><strong>Start exploring today!</strong></p>
 
-<div class="text-center">
-    <h1 class="display-4">Titel</h1>
-    <p>WYSIWYG</p>
 </div>
-
-
 
 @foreach(var item in Model)
 {
     <div class="content-box">
         <div class="row">
             <div class="col">
-                <a asp-controller="Home" asp-action="ViewPost" asp-route-postId="@item.PostName">  <h3> @item.PostName </h3></a>
+                <a asp-controller="Home" asp-action="PostView" asp-route-categoryName="@item.CategoryName" asp-route-subCategoryName="@item.SubCategoryName" asp-route-postId="@item.PostName">  <h3> @item.PostName </h3></a>
             </div>
                  </div>
         <div class="row">
-            <div class="col">
+            <div class="col description">
                 @item.PostDescription
             </div>
            
         </div>
         <div class="row">
             <div class="col">
+                @*Varför skickar den till PostView??????*@
                 <a asp-controller="Home" asp-action="CategoryList" asp-route-categoryName="@item.CategoryName"> @item.CategoryName</a>
             </div>
             <div class="col">
-                <a asp-controller="Home" asp-action="CategoryList" asp-route-categoryName="@item.CategoryName" asp-route-subCategoryName="@item.SubCategoryName">@item.SubCategoryName</a>
+                <a asp-controller="Home" asp-action="SubCategoryList" asp-route-categoryName="@item.CategoryName" asp-route-subCategoryName="@item.SubCategoryName">@item.SubCategoryName</a>
             </div>
         </div>
     </div>

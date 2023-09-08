@@ -1,8 +1,8 @@
-﻿using AspNetCore;
+﻿
 using lucas_2._0.Views.Admin;
 using lucas_2._0.Views.Home;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
+
 
 namespace lucas_2._0.Models
 {
@@ -13,9 +13,9 @@ namespace lucas_2._0.Models
             _context = context;
         }
 
-        public async Task<Views.Admin.IndexVM[]> IndexView()
+        public async Task<IndexListVM[]> IndexView()
         {
-            return await _context.Categories.Select(p => new Views.Admin.IndexVM
+            return await _context.Categories.Select(p => new IndexListVM
             {
                 CategoryId = p.Id,
                 CategoryName = p.Name,
@@ -188,7 +188,7 @@ namespace lucas_2._0.Models
         }
 
 
-        public async Task<CategoryListVM[]> GetSubCategoryPosts(string categoryName, string subCategoryName)
+        public async Task<SubCategoryListVM[]> GetSubCategoryPosts(string categoryName, string subCategoryName)
         {
             var id = await _context.Categories
                 .Where(p => p.Name == categoryName)
@@ -203,7 +203,7 @@ namespace lucas_2._0.Models
             var categoryPosts = await _context.Posts
                 .Where(p => p.SubCategoryId == subCategoryId)
                 .Include(p => p.SubCategory)
-                .Select(p => new CategoryListVM()
+                .Select(p => new SubCategoryListVM()
                 {
                     PostName = p.Title,
                     PostDescription = p.Description,
@@ -217,7 +217,7 @@ namespace lucas_2._0.Models
 
         public async Task<PostViewVM> ShowPost(string postId)
         {
-            var post = _context.Posts.Where(p => p.Title == postId).FirstOrDefault();
+            var post = await _context.Posts.Where(p => p.Title == postId).FirstOrDefaultAsync();
 
             return new PostViewVM
             {

@@ -7,9 +7,9 @@
 
 <div class="row">
     <div class="col-md-7">
-        <div class="widget p-5" style="background-color:#212b36">
+        <div class="widget p-5">
 
-            <form asp-action="AddOrEditPosts" method="post">
+            <form asp-controller="Admin" asp-action="AddOrEditPosts" method="post">
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="SubCategoryId" value="@Model.SubCategoryId" />
@@ -32,7 +32,7 @@
                     <span asp-validation-for="Code" class="text-danger"></span>
                 </div>
 
-                <button type="submit"> Submit </button>
+                <button  type="submit"> Submit </button>
             </form>
         </div>
     </div>
@@ -40,35 +40,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="IndexList">Back to List</a>
 </div>
 
 
-<script>
-    tinymce.init({
-        selector: 'textarea#codesample',
-        height: 500,
-        plugins: 'codesample code lists',
-        codesample_languages: [
-            { text: 'HTML/XML', value: 'markup' },
-            { text: 'JavaScript', value: 'javascript' },
-            { text: 'CSS', value: 'css' },
-            { text: 'PHP', value: 'php' },
-            { text: 'Ruby', value: 'ruby' },
-            { text: 'Python', value: 'python' },
-            { text: 'Java', value: 'java' },
-            { text: 'C', value: 'c' },
-            { text: 'C#', value: 'csharp' },
-            { text: 'C++', value: 'cpp' }
-        ],
-        toolbar: 'codesample code numlist bullist',
-        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
-    });
-
-    // Prevent Bootstrap dialog from blocking focusin
-    document.addEventListener('focusin', (e) => {
-        if (e.target.closest(".tox-tinymce, .tox-tinymce-aux, .moxman-window, .tam-assetmanager-root") !== null) {
-            e.stopImmediatePropagation();
-        }
-    });
-</script>

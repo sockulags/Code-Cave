@@ -22,18 +22,21 @@ namespace lucas_2._0.Controllers
         }
 
         // GET: Admin
-        public async Task<IActionResult> Index()
+        [HttpGet("/Admin")]
+        public async Task<IActionResult> IndexList()
         {
               return View(await _dataService.IndexView());
         }
 
         // GET: Admin/SubCategory/5
+        [HttpGet("/admin/subcategory/{id}")]
         public async Task<IActionResult> SubCategory(int id)
         {
                        
             return View(_dataService.GetSubCategories(id));
         }
         //GET Admin/AddOrEditCategory
+        [HttpGet("/admin/AddOrEditCategory/{id?}")]
         public IActionResult AddOrEditCategory(int? id)
         {
             if (id == null)
@@ -54,12 +57,13 @@ namespace lucas_2._0.Controllers
                     await _dataService.EditCategoryAsync(model);
 
                
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexList));
             }
             return View(model);
         }
 
         //GET Admin/AddOrEditSubCategory
+        [HttpGet("/admin/addoreditsubcategory/{id?}")]
         public IActionResult AddOrEditSubCategory(int? id, int subCategoryId, string categoryName)
         {
             if (subCategoryId == null)
@@ -80,12 +84,13 @@ namespace lucas_2._0.Controllers
                     await _dataService.EditSubCategoryAsync(model);
 
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexList));
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(IndexList));
         }
 
-
+        [HttpGet("/admin/addoreditsubcategory/Posts/{subCategoryId}")]
+        //[Route("Posts/{subCategoryId}")]
         //GET Admin/Posts
         public IActionResult Posts(int subCategoryId)
         {
@@ -93,6 +98,8 @@ namespace lucas_2._0.Controllers
         }
 
         //GET Admin/AddOrEditPosts
+        [HttpGet("AddOrEditPosts/{subCategoryId}/{id?}")]
+        //[Route("AddOrEditPosts/{subCategoryId}/{id?}")]
         public IActionResult AddOrEditPosts(int? id, int subCategoryId)
         {
             if (id == null)
@@ -114,9 +121,9 @@ namespace lucas_2._0.Controllers
                     await _dataService.EditPostsAsync(model);
 
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexList));
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(IndexList));
         }
 
         // GET: Admin/Delete/5
@@ -153,7 +160,7 @@ namespace lucas_2._0.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(IndexList));
         }
 
         private bool CategoryExists(int id)

@@ -4,18 +4,18 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Posts</h1>
+<h1 class="description">@Model.SubCategoryName</h1>
 
 <p>
-    <a asp-action="AddOrEditPosts" asp-route-id="@null" asp-route-subCategoryId="@Model.SubCategoryId" >Create New Post</a>
+    <a asp-controller="Admin" asp-action="AddOrEditPosts" asp-route-id="@null" asp-route-subCategoryId="@Model.SubCategoryId" >Create New Post</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Model.SubCategoryName
+            <th class="description">
+                Posts
             </th>
-            <th></th>
+            <th class="description"></th>
         </tr>
     </thead>
     <tbody>

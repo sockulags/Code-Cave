@@ -1,0 +1,35 @@
+﻿@model IndexListVM[]
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="description">List of categories</h1>
+
+<p>
+    <a asp-controller="Admin" asp-action="AddOrEditCategory">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="description">
+               Category Name
+            </th>
+            <th class="description"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    <a asp-controller="Admin" asp-action="SubCategory" asp-route-id="@item.CategoryId">@item.CategoryName</a>
+            </td>
+            <td>
+                    <a asp-controller="Admin" asp-action="AddOrEditCategory" asp-route-id="@item.CategoryId">Edit</a> |
+                    <a asp-controller="Admin" asp-action="SubCategory" asp-route-id="@item.CategoryId">Sub categories</a> |
+                    <a asp-controller="Admin" asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

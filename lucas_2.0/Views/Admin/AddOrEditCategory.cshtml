@@ -7,9 +7,9 @@
 
 <div class="row">
     <div class="col-md-7">
-        <div class="widget p-5" style="background-color:#212b36">
+        <div class="widget p-5">
 
-            <form asp-action="AddOrEditCategory" method="post">
+            <form asp-controller="Admin" asp-action="AddOrEditCategory" method="post">
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" name="CategoryId" value="@Model.CategoryId" />
@@ -28,7 +28,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="IndexList">Back to List</a>
 </div>
 
 @section Scripts {

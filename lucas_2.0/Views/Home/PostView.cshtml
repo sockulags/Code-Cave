@@ -2,5 +2,22 @@
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
-}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:window.history.back();"><i class="bi bi-arrow-left"></i></a></li>
+       
+    </ol>
+</nav>
+<div>
+    <h1 class="description">@Model.Title</h1>
+    
+        @Html.Raw(Model.Code)
+    
+<p>Created: @Model.Created</p>
+</div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:window.history.back();"><i class="bi bi-arrow-left"></i></a></li>
+
+    </ol>
+</nav>

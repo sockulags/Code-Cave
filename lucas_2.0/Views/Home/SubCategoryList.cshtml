@@ -1,4 +1,4 @@
-﻿@model lucas_2._0.Views.Home.CategoryListVM[]
+﻿@model lucas_2._0.Views.Home.SubCategoryListVM[]
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -8,9 +8,12 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/"><i class="bi bi-house"></i></a></li>
-        <li class="breadcrumb-item active" aria-current="page">@Model.Select(p=>p.CategoryName).FirstOrDefault()</li>
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="CategoryList" asp-route-categoryName="@Model.Select(p=>p.CategoryName).FirstOrDefault()">@Model.Select(p=>p.CategoryName).FirstOrDefault()</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">@Model.Select(p=>p.SubCategoryName).FirstOrDefault()</li>
     </ol>
 </nav>
+
 @foreach (var item in Model)
 {
     <div class="content-box">
@@ -27,7 +30,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <a asp-controller="Home" asp-action="SubCategoryList" asp-route-categoryName="@item.CategoryName" asp-route-subCategoryName="@item.SubCategoryName">@item.SubCategoryName</a>
+                <a asp-controller="Home" asp-action="CategoryList" asp-route-categoryName="@item.CategoryName"> @item.CategoryName</a>
             </div>
             <div class="col">
                 

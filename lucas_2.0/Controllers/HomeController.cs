@@ -20,23 +20,27 @@ namespace lucas_2._0.Controllers
             return View(await _dataService.GetAllPosts());
         }
 
-        [HttpGet]
-        [Route("{categoryName}/{subCategoryName?}")]
-        public async Task<IActionResult> CategoryList(string categoryName, string? subCategoryName)
+        //[HttpGet("{categoryName}/{subCategoryName}")]
+        //[Route("{categoryName}/{subCategoryName?}")]
+        public async Task<IActionResult> SubCategoryList(string categoryName, string subCategoryName)
         {
-            if(subCategoryName == null)
-            {
-                return View(await _dataService.GetCategoryPosts(categoryName));
-            }
-            else
-            {
+          
                 return View(await _dataService.GetSubCategoryPosts(categoryName, subCategoryName));
-            }
+            
         }
 
-        [HttpGet]
-        [Route("{categoryName}/{subCategoryName}/{postId}")]
-        public async Task<IActionResult> ViewPost(string postId)
+        //[HttpGet("{categoryName}")]
+        //[Route("{categoryName}")]
+        public async Task<IActionResult> CategoryList(string categoryName)
+        {
+            
+                return View(await _dataService.GetCategoryPosts(categoryName));
+          
+        }
+
+        //[HttpGet("{categoryName}/{subCategoryName}/{postId}")]
+        //[Route("{postId}")]
+        public async Task<IActionResult> PostView(string categoryName, string subCategoryName,string postId)
         {
             return View(await _dataService.ShowPost(postId));
         }
