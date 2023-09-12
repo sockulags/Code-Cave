@@ -16,7 +16,7 @@ namespace lucas_2._0.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+           
 
             // Specificerar vilken datatyp databasen ska använda för en specifik kkolumn
             modelBuilder.Entity<Category>()

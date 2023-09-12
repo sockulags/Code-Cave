@@ -1,8 +1,12 @@
 ﻿@model AddOrEditPostsVM
 
-@{
+
+
+@if (User.Identity.IsAuthenticated)
+{
+
     ViewData["PageTitle"] = Model.Id == 0 ? "Create a new post" : "Edit post";
-}
+
 
 
 <div class="row">
@@ -42,5 +46,12 @@
 <div>
     <a asp-action="IndexList">Back to List</a>
 </div>
+  
+}
 
+else
+{
 
+    <p>You need to be logged in to se the members page</p>
+
+}

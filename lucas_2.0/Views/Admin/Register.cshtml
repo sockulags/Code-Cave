@@ -1,0 +1,24 @@
+﻿@model RegisterVM
+<h3>Register</h3>
+<form asp-controller="Admin" asp-action="Register" method="post">
+    <label asp-for="FirstName">First name</label>
+    <input asp-for="FirstName" />
+
+    <label asp-for="LastName">Last name</label>
+    <input asp-for="LastName" />
+
+     <label asp-for="Username"></label>
+    <input asp-for="Username" />
+    <span asp-validation-for="Username"></span>
+    
+    <label asp-for="Password"></label>
+    <input asp-for="Password" />
+    <span asp-validation-for="Password"></span>
+
+    <label asp-for="PasswordRepeat"></label>
+    <input asp-for="PasswordRepeat" />
+    <span asp-validation-for="PasswordRepeat"></span>
+    <br />
+    <input type="submit" value="Register" />
+</form>
+<div asp-validation-summary="All"></div>

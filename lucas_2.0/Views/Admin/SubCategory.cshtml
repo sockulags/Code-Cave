@@ -1,7 +1,9 @@
 ﻿@model SubCategoryVM
-@{
+@if (User.Identity.IsAuthenticated)
+{
+
     ViewData["Title"] = $"Sub Categories of {Model.CategoryName}";
-}
+
 
 <p>
     <a asp-action="AddOrEditSubCategory" asp-route-id="@Model.CategoryId" asp-route-categoryName="@Model.CategoryName">Create New Sub Category</a>
@@ -35,3 +37,13 @@
     
     <a asp-controller="Admin" asp-action="IndexList">Back to List</a>
 </div>
+
+   
+}
+
+else
+{
+
+    <p>You need to be logged in to se the members page</p>
+
+}

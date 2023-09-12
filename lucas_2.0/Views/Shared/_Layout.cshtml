@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - The Code Cave</title>
-   
-   
+
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://cdn.tiny.cloud/1/xz2iauvbk2f6ouxs8c2buqbbvb2rw4ben7j7m0cckkq4n2i8/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
@@ -16,66 +16,82 @@
     @*<link href="~/css/prism.css" rel="stylesheet" id="style" type="text/css"/>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-csharp.js"></script>
 
-    
+
 </head>
 <body>
     <div class="container-fluid">
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow navStyling">
-            <div class="container-fluid">
+        <header>
+            <nav class="navbar navbar-expand-md navbar-toggleable-md border-bottom box-shadow navStyling">
+                <div class="container-fluid">
                     <a class="navbar-brand nav-text" asp-area="" asp-controller="Home" asp-action="Index">The Code Cave</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                                <a class="nav-link nav-text" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                                <a class="nav-link nav-text" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"> <i class="bi bi-list size-burger"></i></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-md-inline-flex justify-content-center">
+                        <ul class="navbar-nav flex-grow-1">
+                            
+                            <li class="nav-item">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a class="nav-link nav-text" asp-area="" asp-controller="Admin" asp-action="LogOut">Sign out</a>
+
+                                }
+                                else
+                                {
+
+                                    <a class="nav-link nav-text" asp-area="" asp-controller="Admin" asp-action="LogIn">Sign in</a>
+                                }
+                                <div class="hamburger-menu">
+                                @(await Component.InvokeAsync("MenuList"))
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <input class="darkmode-input" type="checkbox" id="darkmode-toggle" />
+                    <label class="darkmode-label" for="darkmode-toggle"></label>
+
                 </div>
-                
-                <input class="darkmode-input" type="checkbox" id="darkmode-toggle" />
-                <label class="darkmode-label" for="darkmode-toggle"></label>
-                   
+            </nav>
+        </header>
+
+        <div class="row">
+
+            <div class="col-0 col-md-3 sticky-top listLayout">
+                <div class="responsive-menu">
+                    <div class="d-flex flex-column align-items-left sticky-top min-vh-100 border-end border-2">
+                        @(await Component.InvokeAsync("MenuList"))
+                    </div>
+                </div>
             </div>
-        </nav>
-    </header>
-    
-    <div class="row">
-            <div class="col-auto sticky-top ">
-    @(await Component.InvokeAsync("MenuList"))
-            </div>
-            <div class="col-9 p-3 min-vh-100">
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+            <div class="col-12 col-md-9 p-3 min-vh-100">
+                <div class="container">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
             </div>
         </div>
-    
     </div>
+
+
     <footer class="border-top footer text-muted">
         <div class="container">
             The Code Cave  - &copy; 2023 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    
+
     <script>
         tinymce.init({
             selector: 'textarea#codesample',
             height: 500,
             plugins: 'codesample code lists',
-           
+
             codesample_languages: [
                 { text: 'HTML/XML', value: 'markup' },
                 { text: 'JavaScript', value: 'javascript' },
@@ -91,7 +107,7 @@
             toolbar: 'codesample code numlist bullist',
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
             content_css: '/site.css'
-            
+
         });
 
         // Prevent Bootstrap dialog from blocking focusin
@@ -101,6 +117,41 @@
             }
         });
     </script>
+    @*           <script id="full" type="text/html">
+
+    function myFunction(x) {
+
+    if (x.matches) { // If media query matches
+
+    <div class="col - 3 sticky - top listLayout" >
+    <div class="responsive-menu" >
+    @(
+    await Component.InvokeAsync("MenuList")
+    )
+    </div>
+    </div>
+    < div class="col-9 p-3 min-vh-100" >
+    <div class="container" >
+    <main role="main" class="pb-3" >
+    @{RenderBody();}
+    </main>
+    </div>
+    </div>;
+    }
+    else {
+    <div class="container" >
+    <main role="main" class="pb-3" >
+    {@RenderBody();}
+    </main>
+    </div>;
+    }
+    }
+
+    var x = window.matchMedia("(max-width: 768px)")
+    myFunction(x) // Call listener function at run time
+    x.addListener(myFunction) // Attach listener function on state changes
+
+    </script>@**@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

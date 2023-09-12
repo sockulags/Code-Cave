@@ -1,8 +1,11 @@
 ﻿@model IndexListVM[]
 
-@{
+
+@if (User.Identity.IsAuthenticated)
+{
+
     ViewData["Title"] = "Index";
-}
+
 
 <h1 class="description">List of categories</h1>
 
@@ -33,3 +36,13 @@
 }
     </tbody>
 </table>
+
+   
+}
+
+else
+{
+
+    <p>You need to be logged in to se the members page</p>
+
+}

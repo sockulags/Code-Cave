@@ -8,7 +8,7 @@
 
 
 
-<div class="d-flex flex-column align-items-left sticky-top min-vh-100 border-end border-2">
+
                
                 @foreach (var category in Model){
                 <div class="dropdown">
@@ -18,15 +18,15 @@
 
             
 
-            <a asp-controller="Home" asp-action="CategoryList" asp-route-categoryName="@category.CategoryName" class="d-flex align-items-center justify-content-left p-2 text-decoration-none listShow dropdown-item" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="true">
+            <a asp-controller="Home" asp-action="CategoryList" asp-route-categoryName="@category.CategoryName" class="d-flex align-items-center justify-content-left p-2 text-decoration-none listShow dropdown-item" id="dropdownUser3"  aria-expanded="true">
                         @category.CategoryName
                     </a>
-                    <ul class="dropdown hiddenList" aria-labelledby="dropdownUser3">
+                    <ul class="dropdown hiddenList menuList" aria-labelledby="dropdownUser3">
                             @foreach(var item in category.SubCategories)
                             {
                                 if(category.CategoryId == item.CategoryId)
                                 {
-                                <li ><a asp-controller="Home" asp-action="CategoryList" asp-route-categoryName="@category.CategoryName" asp-route-subCategoryName="@item.Name" class="dropdown-item">@item.Name</a></li>
+                                <li ><a asp-controller="Home" asp-action="SubCategoryList" asp-route-categoryName="@category.CategoryName" asp-route-subCategoryName="@item.Name" class="dropdown-item">@item.Name</a></li>
                                 }
                             }
               
@@ -34,7 +34,7 @@
                 </div>
                  
                 }
-            </div>
+           
 
 
             <!-- content -->

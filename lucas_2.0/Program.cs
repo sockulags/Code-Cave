@@ -1,4 +1,5 @@
 ﻿using lucas_2._0.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Routing.Template;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,8 +15,16 @@ var connString = builder.Configuration
 // Registrera Context-klassen för dependency injection
 builder.Services.AddDbContext<ApplicationContext>
     (o => o.UseSqlServer(connString));
+builder.Services.AddDbContext<AccountContext>
+    (o => o.UseSqlServer(connString));
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+      .AddEntityFrameworkStores<AccountContext>()
+      .AddDefaultTokenProviders();
 builder.Services.AddScoped<DataService>();
 builder.Services.AddScoped<MenuList>();
+builder.Services.AddScoped<AccountService>();
+
+builder.Services.ConfigureApplicationCookie(o => o.LoginPath = "/login");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -52,14 +61,14 @@ app.MapControllerRoute(
     name: "custom3",
     pattern: "{categoryName}/{subCategoryName}",
     defaults: new { controller = "Home", action = "SubCategoryList" });
-//app.MapControllerRoute(
-//    name: "admin2",
-//    pattern: "Admin/AddOrEditCategory/{id?}",
-//    defaults: new { controller = "Admin", action = "AddOrEditCategory" });
-//app.MapControllerRoute(
-//    name: "admin3",
-//    pattern: "Admin/AddOrEditCategory/{id?}",
-//    defaults: new { controller = "Admin", action = "AddOrEditCategory" });
+app.MapControllerRoute(
+    name: "register",
+    pattern: "Admin/Register",
+    defaults: new { controller = "Admin", action = "Register" });
+app.MapControllerRoute(
+    name: "login",
+    pattern: "Admin/Login",
+    defaults: new { controller = "Admin", action = "Login" });
 
 
 

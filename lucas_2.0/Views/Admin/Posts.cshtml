@@ -1,8 +1,10 @@
 ﻿@model PostsVM
 
-@{
+@if (User.Identity.IsAuthenticated)
+{
+
     ViewData["Title"] = "Index";
-}
+
 
 <h1 class="description">@Model.SubCategoryName</h1>
 
@@ -23,13 +25,22 @@
         {
             <tr>
                 <td>
-                    <a asp-action="AddOrEditPosts" asp-route-id="@item.Id">@item.Title</a>
+                        <a asp-controller="Admin" asp-action="AddOrEditPosts" asp-route-id="@item.Id" asp-route-subCategoryId="@Model.SubCategoryId">@item.Title</a>
                 </td>
                 <td>
-                    <a asp-action="AddOrEditPosts" asp-route-id="@item.Id" asp-route-subCategoryId="@Model.SubCategoryId" >Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a asp-controller="Admin" asp-action="AddOrEditPosts" asp-route-id="@item.Id" asp-route-subCategoryId="@Model.SubCategoryId">Edit</a> |
+                        <a asp-controller="Admin" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+}
+
+else
+{
+
+    <p>You need to be logged in to se the members page</p>
+
+}

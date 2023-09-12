@@ -1,10 +1,12 @@
 :root {
     --clr-dark: #1d2331;
-    --clr-light: #f7f9ff;
+    --clr-light: #f7f7f7;
     --txt-clr-dark: #e6e6e6;
     --txt-clr-light: #0e111b;
     --nav-clr-light: #e2e6eb;
     --nav-clr-dark: #131823;
+    --content-clr-dark: #1d2331;
+    --content-clr-light: #f2f2f2;
 }
 
 html {
@@ -14,11 +16,40 @@ html {
 @media (min-width: 768px) {
   html {
     font-size: 16px;
+
   }
+  .responsive-menu{
+      display:contents;
+  }
+    .hamburger-menu {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+       .responsive-menu {
+        display: none;
+    }
+       .hamburger-menu {
+           display:contents;
+       }
+}
+.menu-col{
+    display:grid;
+    column-width: 3fr;
+}
+
+.main-col{
+    grid-column-start: 3;
+    column-width: 9fr;
+    
+}
+.size-burger{
+    font-size: 2rem;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
@@ -32,26 +63,52 @@ body {
     background-color: var(--clr-light);
 }
 
+h1{
+    font-size: 2.5rem;
+    font-weight:500;
+    padding-top: 30px;
+}
+
+h2{
+    font-size: 1.5rem;
+}
+
 .navStyling{
     background-color: var(--nav-clr-light);
-   
+   padding: 20px 10px;
+  
+}
+
+.listLayout{
+    max-width:250px;
+    
 }
 .dark-mode {
     --clr-light: #1d2331;
-    --clr-dark: #f7f9ff;
+    --clr-dark: #f7f7f7;
     --txt-clr-light: #e6e6e6;
     --txt-clr-dark: #0e111b;
     --nav-clr-dark: #e2e6eb;
     --nav-clr-light: #131823;
+    --content-clr-light: #1d2331;
+    --content-clr-dark: #f2f2f2;
 }
 
 .content-box {
     margin: 2%;
     border-radius: 1%;
-    border-color: var(--clr-dark);
-    border-style: inset;
-    padding: 1% 3%;
+    border-color: #d4d4d4;
+    border-style: solid;
+    padding: 2% 3%;
     transition: color .3s ease-in-out;
+    background-color: var(--content-clr-light);
+    border-width: 1px;
+}
+
+
+.content-tags {
+    margin-top: 1rem;
+   
 }
 
 a:link, a:visited {
@@ -68,6 +125,11 @@ p {
     }
 
 a {
+    color: var(--txt-clr-light);
+    transition: color .3s ease-in-out;
+}
+
+li {
     color: var(--txt-clr-light);
     transition: color .3s ease-in-out;
 }
@@ -90,10 +152,10 @@ a {
    
 }
 
-ul {
+ul.menuList {
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 2px 0px;
 }
 
 
@@ -108,8 +170,8 @@ ul {
 
 .text {
     color: var(--txt-clr-light);
-    font-size: 3.5em;
-    font-weight: initial;
+    
+    
     animation: fadein 3s ease-in-out;
     transition: color .3s ease-in-out;
 }

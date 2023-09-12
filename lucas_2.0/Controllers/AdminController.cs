@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using lucas_2._0.Models;
 using lucas_2._0.Views.Admin;
+using Microsoft.AspNetCore.Authorization;
 
 namespace lucas_2._0.Controllers
 {
@@ -14,11 +15,75 @@ namespace lucas_2._0.Controllers
     {
         private readonly ApplicationContext _context;
         private readonly DataService _dataService;
+        private readonly AccountService _accountService;
 
-        public AdminController(ApplicationContext context, DataService dataService)
+        public AdminController(ApplicationContext context, DataService dataService, AccountService accountService)
         {
             _context = context;
             _dataService = dataService;
+            _accountService = accountService;   
+        }
+
+        [AllowAnonymous]
+        [HttpGet("/Admin/Register")]
+       
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost("/Admin/Register")]
+        public async Task<IActionResult> RegisterAsync(RegisterVM viewModel)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            // Try to register user
+            var errorMessage = await _accountService.TryRegisterAsync(viewModel);
+            if (errorMessage != null)
+            {
+                // Show error
+                ModelState.AddModelError(string.Empty, errorMessage);
+                return View();
+            }
+
+
+
+            return RedirectToAction(nameof(IndexList));
+        }
+
+        [HttpGet("/Admin/Login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost("/Admin/Login")]
+        public async Task<IActionResult> LoginAsync(LoginVM viewModel)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            // Check if credentials is valid (and set auth cookie)
+            var success = await _accountService.TryLoginAsync(viewModel);
+            if (!success)
+            {
+                // Show error
+                ModelState.AddModelError(string.Empty, "Login failed");
+                return View();
+            }
+
+            // Redirect user
+            return RedirectToAction(nameof(IndexList));
+
+
+
+        }
+        [HttpGet]
+        public async Task<IActionResult> LogOutAsync()
+        {
+            await _accountService.SignOutAsync();
+            return RedirectToAction("");
         }
 
         // GET: Admin
@@ -149,14 +214,14 @@ namespace lucas_2._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Categories == null)
+            if (_context.Posts == null)
             {
                 return Problem("Entity set 'ApplicationContext.Categories'  is null.");
             }
-            var category = await _context.Categories.FindAsync(id);
-            if (category != null)
+            var post = await _context.Posts.FindAsync(id);
+            if (post != null)
             {
-                _context.Categories.Remove(category);
+                _context.Posts.Remove(post);
             }
             
             await _context.SaveChangesAsync();

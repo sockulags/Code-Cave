@@ -1,8 +1,9 @@
 ﻿@model AddOrEditSubCategoryVM
 
-@{
+@if (User.Identity.IsAuthenticated)
+{
     ViewData["PageTitle"] = Model.SubCategoryId == 0 ? $"Add sub category to {Model.CategoryName}" : $"Edit sub category of {Model.CategoryName}";
-}
+
 
 
 <div class="row">
@@ -32,6 +33,15 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+}
+
+else
+{
+
+    <p>You need to be logged in to se the members page</p>
+
+}
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
