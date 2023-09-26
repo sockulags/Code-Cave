@@ -1,16 +1,27 @@
 :root {
     --clr-dark: #1d2331;
-    --clr-light: #f7f7f7;
+    --clr-light: #f0ead2;
     --txt-clr-dark: #e6e6e6;
-    --txt-clr-light: #0e111b;
-    --nav-clr-light: #e2e6eb;
+    --txt-clr-light: #594a40;
+    --nav-clr-light: #adc178;
     --nav-clr-dark: #131823;
     --content-clr-dark: #1d2331;
-    --content-clr-light: #f2f2f2;
+    --content-clr-light: #ece3c5;
+    --border-clr-light: #e3d2a1;
+    --nav-text-clr-light: #473c33;
+    --hov-clr-light:#dde5b6;
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
 html {
   font-size: 14px;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 60px;
+    background-color: var(--clr-light);
 }
 
 @media (min-width: 768px) {
@@ -20,6 +31,7 @@ html {
   }
   .responsive-menu{
       display:contents;
+     
   }
     .hamburger-menu {
         display: none;
@@ -32,6 +44,18 @@ html {
     }
        .hamburger-menu {
            display:contents;
+           
+       }
+
+       .dropdown {
+           justify-content: center;
+       }
+       .dropdown-item, dropdown-item + li,.dropdown-item + a {
+           display: flex;
+           justify-content: center;
+       }
+       .nav-text-styling{
+           justify-content: center;
        }
 }
 .menu-col{
@@ -58,10 +82,6 @@ html {
     
 }
 
-body {
-    margin-bottom: 60px;
-    background-color: var(--clr-light);
-}
 
 h1{
     font-size: 2.5rem;
@@ -79,8 +99,13 @@ h2{
   
 }
 
+.nav-text-styling {
+    color: var(--nav-text-clr-light)
+}
+
 .listLayout{
     max-width:250px;
+    
     
 }
 .dark-mode {
@@ -97,7 +122,7 @@ h2{
 .content-box {
     margin: 2%;
     border-radius: 1%;
-    border-color: #d4d4d4;
+    border-color: var(--border-clr-light);
     border-style: solid;
     padding: 2% 3%;
     transition: color .3s ease-in-out;
@@ -105,6 +130,10 @@ h2{
     border-width: 1px;
 }
 
+.border-end{
+    border-right:1px solid var(--border-clr-light) !important;
+    
+}
 
 .content-tags {
     margin-top: 1rem;
@@ -122,7 +151,17 @@ p {
 
 .dropdown-item {
     color: var(--txt-clr-light);
-    }
+ 
+}
+
+.dropdown{
+    padding: 5px 25px;
+}
+
+ 
+
+
+
 
 a {
     color: var(--txt-clr-light);
@@ -177,8 +216,44 @@ ul.menuList {
 }
 
 .nav-text {
-    color: var(--txt-clr-light);
+  
     transition: color .3s ease-in-out;
+    font-weight: 400;
+    font-size: 1.2rem;
+    padding-top: 80px;
+
+    
+}
+
+.logotype{
+    height: 120px;
+    width: auto;
+    padding-left: 30px;
+    margin-right: 30px
+
+    
+}
+
+.dropdown-item:hover {
+  
+    background-color: var(--clr-light);
+    font-weight: 600;
+  box-shadow: 
+}
+
+
+
+.nav-text-header {
+    
+    transition: color .3s ease-in-out;
+    font-weight: 500;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-content: end;
+    flex-wrap: wrap;
+    padding-left: 0;
+    padding-right: 10px;
 }
 
 .description {
@@ -195,6 +270,44 @@ ul.menuList {
         opacity: 1;
     }
 }
+
+.sibling-fade {
+  
+}
+    /* Prevents :hover from triggering in the gaps between items */
+
+    .sibling-fade > * {
+        visibility: visible;
+    }
+    /* Brings the child items back in, even though the parent is `hidden` */
+
+    .sibling-fade > * {
+        transition: opacity 15ms linear 100ms, transform 0ms ease-in-out 10ms;
+    }
+    /* Makes the fades smooth with a slight delay to prevent jumps as the mouse moves between items */
+
+    .sibling-fade:hover > * {
+        opacity: 0.4;
+        transform: scale(0.9);
+    }
+    /* Fade out all items when the parent is hovered */
+
+    .sibling-fade > *:hover {
+        opacity: 1;
+        transform: scale(1);
+        transition-delay: 0ms;
+    }
+/* Fade in the currently hovered item */
+
+    .sibling-fade > * {
+       
+    
+        flex: auto;
+    
+    
+        text-decoration: none;
+    }
+
 
 .darkmode-label{
     width: 5rem;

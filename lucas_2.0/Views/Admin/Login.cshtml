@@ -4,13 +4,13 @@
 <p>Don't have an account? <a asp-controller="Admin" asp-action="Register">Register here</a></p>
 <form asp-controller="Admin" asp-action="Login">
     <label asp-for="Username"></label>
-    <input asp-for="Username" />
+    <input asp-for="Username" value="Admin"/>
     <span asp-validation-for="Username"></span>
     
     <label asp-for="Password"></label>
-    <input asp-for="Password" />
+    <input asp-for="Password" value="Passw0rd!"/>
     <span asp-validation-for="Password"></span>
     <br />
-    <input type="submit" value="Log In" />
+    <input type="submit" value="Demo log In" />
 </form>
 <div asp-validation-summary="All"></div>
