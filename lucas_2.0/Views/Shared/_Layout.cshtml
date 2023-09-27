@@ -11,7 +11,7 @@
     <script src="https://cdn.tiny.cloud/1/xz2iauvbk2f6ouxs8c2buqbbvb2rw4ben7j7m0cckkq4n2i8/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="~/css/site.css" rel="stylesheet" />
     <script src="~/js/prism.js"></script>
     <script src="~/js/prism-darkmode.js"></script>
@@ -23,10 +23,11 @@
 </head>
 <body>
     <div class="container-fluid p-0">
+        <div class="hamburger-menu">
         <header>
             <nav class="navbar navbar-expand-md navbar-toggleable-md border-bottom box-shadow navStyling">
                 <div class="container-fluid">
-                    <a class="navbar-brand nav-text-header nav-text-styling" asp-area="" asp-controller="Home" asp-action="Index"><img class="logotype" src="/images/logo_the_code_cave.png"/></a>
+                    <a class="navbar-brand nav-text-header nav-text-styling" asp-area="" asp-controller="Home" asp-action="Index"><img class="logotype" src="/images/code-cave-logo.png" /></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"> <i class="bi bi-list size-burger"></i></span>
@@ -45,24 +46,39 @@
 
                                     <a class="nav-link nav-text nav-text-styling" asp-area="" asp-controller="Admin" asp-action="LogIn">Admin</a>
                                 }
-                                <div class="hamburger-menu">
+                              
                                 @(await Component.InvokeAsync("MenuList"))
-                                </div>
+                               
                             </li>
                         </ul>
                     </div>
 
-                    <input class="darkmode-input" type="checkbox" id="darkmode-toggle" />
-                    <label class="darkmode-label" for="darkmode-toggle"></label>
+                    
 
                 </div>
             </nav>
         </header>
-
+        </div>
         <div class="row">
 
             <div class="col-0 col-md-3 sticky-top listLayout">
                 <div class="responsive-menu">
+                    <a class="navbar-brand nav-text-header nav-text-styling" asp-area="" asp-controller="Home" asp-action="Index"><img class="logotype" src="/images/code-cave-logo.png" /></a>
+                    <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="nav-link nav-text nav-text-styling" asp-area="" asp-controller="Admin" asp-action="LogOut">Sign out</a>
+
+                        }
+                        else
+                        {
+
+                            <a class="nav-link nav-text nav-text-styling" asp-area="" asp-controller="Admin" asp-action="LogIn">Admin</a>
+                        }
+                     
+                    </li>
+                    </ul>
                     <div class="d-flex flex-column align-items-left sticky-top min-vh-100 border-end border-2 pt-sm-3">
                         @(await Component.InvokeAsync("MenuList"))
                     </div>

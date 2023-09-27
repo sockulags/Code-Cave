@@ -7,7 +7,7 @@
     <div class="intro"><h1 class="text">The Code Cave: A Repository Of Knowledge</h1></div>
 <p ><span>Welcome to The Code Cave, a repository of my knowledge and experiences as a developer. I'm sharing everything I've learned along the way, from the basics of programming to more advanced concepts.</span></p>
 <p ><span>Whether you're a beginner or a seasoned pro, you'll find something useful here. I hope my journey can inspire you to start your own.</span></p>
-<p><strong>Start exploring today!</strong></p>
+
 
 </div>
 
@@ -25,14 +25,13 @@
             </div>
            
         </div>
-        <div class="row content-tags">
-            <div class="col">
+        <div class="btn-container">
+            
                
-                <a asp-controller="Home" asp-action="CategoryList" asp-route-categoryName="@item.CategoryName"> @item.CategoryName</a>
-            </div>
-            <div class="col">
-                <a asp-controller="Home" asp-action="SubCategoryList" asp-route-categoryName="@item.CategoryName" asp-route-subCategoryName="@item.SubCategoryName">@item.SubCategoryName</a>
-            </div>
+                <a class="btn btn-color-2"asp-controller="Home" asp-action="CategoryList" asp-route-categoryName="@item.CategoryName"> @item.CategoryName</a>
+
+            <a class="btn btn-color-2" asp-controller="Home" asp-action="SubCategoryList" asp-route-categoryName="@item.CategoryName" asp-route-subCategoryName="@item.SubCategoryName">@item.SubCategoryName</a>
+           
         </div>
     </div>
 }

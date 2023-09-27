@@ -25,13 +25,13 @@
             </div>
 
         </div>
-        <div class="row">
-            <div class="col">
-                <a asp-controller="Home" asp-action="SubCategoryList" asp-route-categoryName="@item.CategoryName" asp-route-subCategoryName="@item.SubCategoryName">@item.SubCategoryName</a>
-            </div>
-            <div class="col">
-                
-            </div>
+    
+        <div class="btn-container">
+
+
+
+            <a class="btn btn-color-2" asp-controller="Home" asp-action="SubCategoryList" asp-route-categoryName="@item.CategoryName" asp-route-subCategoryName="@item.SubCategoryName">@item.SubCategoryName</a>
+
         </div>
     </div>
 }

@@ -28,13 +28,14 @@
             </div>
 
         </div>
-        <div class="row">
-            <div class="col">
-                <a asp-controller="Home" asp-action="CategoryList" asp-route-categoryName="@item.CategoryName"> @item.CategoryName</a>
-            </div>
-            <div class="col">
-                
-            </div>
+      
+        <div class="btn-container">
+
+
+            <a class="btn btn-color-2" asp-controller="Home" asp-action="CategoryList" asp-route-categoryName="@item.CategoryName"> @item.CategoryName</a>
+
+            
+
         </div>
     </div>
 }
